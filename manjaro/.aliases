@@ -1,5 +1,24 @@
 alias d='cd /home/william/DYJ'
-
 alias s='screenfetch'
+alias his='history'
+alias q='exit'
+alias quit='exit'
+alias y='youdao '
+alias cdh='cd ~/DYJ/Mylog/blog'
+alias lsn='ls | nl'
 
-alias h='history'
+alias loc='open http://127.0.0.1'
+
+alias gdc='git diff --cached'
+alias gdm='git diff master'
+alias gs='git status -s'
+alias gmg='git commit -m'
+
+alias py='python'
+
+alias hexog='hexo g'
+alias hexod='hexo d'
+
+
+alias nv='nvim'
+
