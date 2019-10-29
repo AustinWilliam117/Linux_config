@@ -1,14 +1,64 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+# 256色显示
+export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
 export ZSH="/home/william/.oh-my-zsh"
+
+# ZSH_THEME="spaceship"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs pyenv)
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time
+                                    vcs background_jobs_joined time_joined)
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="clear"
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="clear"
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="yellow"
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="yellow"
+POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="blue"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="blue"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
+POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
+POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND="white"
+POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
+POWERLEVEL9K_TIME_BACKGROUND="clear"
+POWERLEVEL9K_TIME_FOREGROUND="cyan"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='magenta'
+POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='clear'
+POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +118,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+#plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,13 +148,41 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#zplug 'plugins/git', from:oh-my-zsh, if:'which git'
-#zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
-#zplug "plugins/vi-mode", from:oh-my-zsh
-#zplug 'zsh-users/zsh-autosuggestions'
-#zplug 'zsh-users/zsh-completions', defer:2
-#zplug 'zsh-users/zsh-history-substring-search'
-#zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+# zplug configruation
+if [[ ! -d "${ZPLUG_HOME}" ]]; then
+  if [[ ! -d ~/.zplug ]]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
+    # If we can't get zplug, it'll be a very sobering shell experience. To at
+    # least complete the sourcing of this file, we'll define an always-false
+    # returning zplug function.
+    if [[ $? != 0 ]]; then
+      function zplug() {
+        return 1
+      }
+    fi
+  fi
+  export ZPLUG_HOME=~/.zplug
+fi
+if [[ -d "${ZPLUG_HOME}" ]]; then
+  source "${ZPLUG_HOME}/init.zsh"
+fi
+
+zplug 'plugins/git', from:oh-my-zsh, if:'which git'
+# zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
+zplug "plugins/vi-mode", from:oh-my-zsh
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions', defer:2
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+
+if ! zplug check; then
+  zplug install
+fi
+
+zplug load
+
+# zsh-autosuggestions 自动补全快捷键修改
+bindkey ',' autosuggest-accept
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #. /usr/share/autojump/autojump.sh
@@ -114,3 +192,7 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+/usr/share/autojump/autojump.bash
