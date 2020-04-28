@@ -1,20 +1,17 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-# 256色显示
-export TERM="xterm-256color"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/home/william/.oh-my-zsh"
 
-# ZSH_THEME="spaceship"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#256色显示
+export TERM="xterm-256color"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs pyenv)
 POWERLEVEL9K_MODE='nerdfont-complete'
@@ -27,8 +24,7 @@ POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time
-                                    vcs background_jobs_joined time_joined)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_timevcs background_jobs_joined time_joined)
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="clear"
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="clear"
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="yellow"
@@ -53,12 +49,6 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='magenta'
 POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='clear'
 POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -118,7 +108,7 @@ POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git vi-mode)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -168,7 +158,7 @@ if [[ -d "${ZPLUG_HOME}" ]]; then
 fi
 
 zplug 'plugins/git', from:oh-my-zsh, if:'which git'
-# zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
+zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions', defer:2
@@ -184,15 +174,16 @@ zplug load
 # zsh-autosuggestions 自动补全快捷键修改
 bindkey ',' autosuggest-accept
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#. /usr/share/autojump/autojump.sh
-#source /home/william/.dotfiles/shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 
 if [ -f ~/.aliases ]; then
-    . ~/.aliases
+        . ~/.aliases
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-/usr/share/autojump/autojump.bash
+
+plugins=(virtualenv)
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
+
+# 使用git安装的
+
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh

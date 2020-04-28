@@ -10,15 +10,17 @@ alias lsn='ls | nl'
 alias loc='open http://127.0.0.1'
 
 alias gdc='git diff --cached'
-alias gdm='git diff master'
+alias gdm='git diff master'a
 alias gs='git status -s'
 alias gmg='git commit -m'
 
-alias py='python'
+alias py='python3'
+alias python='python3'
 
 alias hexog='hexo g'
 alias hexod='hexo d'
 
 
 alias nv='nvim'
-
+    
+alias export='export https_proxy=http://127.0.0.1:12333'
