@@ -81,3 +81,4 @@ let NERDTreeIgnore=[
     \ '\.pyc$', '\.hg$', '\.swp$', '\.git$', '\.svn$', '\.stversions$', '\.ropeproject$',
     \ '\.pyo$', '\DS_Store$', '\.sass-cache$', '__pycache__$', '\.egg-info$', 
     \ ]
+

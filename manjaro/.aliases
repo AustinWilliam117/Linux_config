@@ -1,3 +1,4 @@
+ 
 alias d='cd /home/william/DYJ'
 alias s='screenfetch'
 alias his='history'
@@ -22,5 +23,5 @@ alias hexod='hexo d'
 
 
 alias nv='nvim'
-    
-alias export='export https_proxy=http://127.0.0.1:12333'
+
+

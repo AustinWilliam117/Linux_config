@@ -4,55 +4,138 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/william/.oh-my-zsh"
 
-#256色显示
-export TERM="xterm-256color"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs pyenv)
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# -------------------------------- POWERLEVEL ---------------------------------
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+COLOR=(
+	004 
+#	005 
+	006 
+#	010
+	007
+	)
+COLOR_ARRAY=(
+	004 067 059 
+#	005 062 059 
+	006 073 109 
+#	010 070 115
+	007 249 240
+	)
+# THEME_COLOR=$(( $RANDOM % 3 ))
+THEME_COLOR=1
+DEFAULT_BACKGROUND=235
+DEFAULT_FOREGROUND="${COLOR[$(( $THEME_COLOR + 1 ))]}"
+
+POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
-POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_timevcs background_jobs_joined time_joined)
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="clear"
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="clear"
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="yellow"
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="yellow"
-POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="blue"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="blue"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
-POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND="white"
-POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
+
+#####################################[ prompt ]######################################
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{$DEFAULT_FOREGROUND}╭─"
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\ue0b4'
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\ue0b4'
+POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\ue0b0'
+
+
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{$DEFAULT_FOREGROUND}╰─%F{${COLOR_ARRAY[$(( $THEME_COLOR * 3 + 2 ))]}}\uf054%F{$DEFAULT_FOREGROUND}\uf054"
+
+
+typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION=$'\uf054'
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=124
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=70
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user device virtualenv dir vcs newline prompt_char)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time background_jobs status history time ssh)
+
+#####################################[ vcs: git status ]######################################
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND="green"
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_VCS_GIT_ICON=$'\uF113 '
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="yellow"
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=166
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="$DEFAULT_BACKGROUND"
+
+##################################[ dir: current directory ]##################################
+POWERLEVEL9K_DIR_HOME_BACKGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=16
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_absolute"
+POWERLEVEL9K_SHORTEN_DELIMITER='...'
+POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=240
+
+##################################[ status ]##################################
 POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_OK_BACKGROUND="$(( $DEFAULT_BACKGROUND + 4 ))"
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
-POWERLEVEL9K_TIME_BACKGROUND="clear"
-POWERLEVEL9K_TIME_FOREGROUND="cyan"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='magenta'
-POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='clear'
-POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND="$(( $DEFAULT_BACKGROUND + 4 ))"
+
+POWERLEVEL9K_HISTORY_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_HISTORY_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
+
+POWERLEVEL9K_VIRTUALENV_BACKGROUND="$((  $DEFAULT_BACKGROUND - 2 ))"
+POWERLEVEL9K_VIRTUALENV_FOREGROUND="$DEFAULT_FOREGROUND"
+
+POWERLEVEL9K_OS_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_OS_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
+
+POWERLEVEL9K_TIME_FORMAT="%D{%T}" #  15:29:33
+POWERLEVEL9K_TIME_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_TIME_BACKGROUND="$DEFAULT_BACKGROUND"
+
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
+#POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+
+POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND="$DEFAULT_FOREGROUND"
+
+
+POWERLEVEL9K_ROOT_ICON=$'\uF198'  # 
+
+POWERLEVEL9K_SSH_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_SSH_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_SSH_ICON="\uF489"  # 
+
+POWERLEVEL9K_HOST_LOCAL_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_HOST_LOCAL_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_HOST_REMOTE_FOREGROUND="$DEFAULT_FOREGROUND"
+POWERLEVEL9K_HOST_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
+
+
+POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_LOAD_WARNING_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="red"
+POWERLEVEL9K_LOAD_WARNING_FOREGROUND="yellow"
+POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="green"
+POWERLEVEL9K_LOAD_CRITICAL_VISUAL_IDENTIFIER_COLOR="red"
+POWERLEVEL9K_LOAD_WARNING_VISUAL_IDENTIFIER_COLOR="yellow"
+POWERLEVEL9K_LOAD_NORMAL_VISUAL_IDENTIFIER_COLOR="green"
+
+POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND_COLOR="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND="$DEFAULT_BACKGROUND"
+POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
+
+function prompt_user() {
+    p10k segment -b  $DEFAULT_BACKGROUND -f $DEFAULT_FOREGROUND -i $'\uf2be' +r -t '%n'
+}
+function prompt_device() {
+    p10k segment -b "$(( $DEFAULT_BACKGROUND + 2 ))" -f $DEFAULT_FOREGROUND -i $'\uf108' +r -t '%m'
+}
+# -------------------------------- POWERLEVEL ---------------------------------
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -73,7 +156,7 @@ POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -104,13 +187,49 @@ POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+# zplug configruation
+if [[ ! -d "${ZPLUG_HOME}" ]]; then
+  if [[ ! -d ~/.zplug ]]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
+    # If we can't get zplug, it'll be a very sobering shell experience. To at
+    # least complete the sourcing of this file, we'll define an always-false
+    # returning zplug function.
+    if [[ $? != 0 ]]; then
+      function zplug() {
+        return 1
+      }
+    fi
+  fi
+  export ZPLUG_HOME=~/.zplug
+fi
+if [[ -d "${ZPLUG_HOME}" ]]; then
+  source "${ZPLUG_HOME}/init.zsh"
+fi
+
+zplug 'plugins/git', from:oh-my-zsh, if:'which git'
+#zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
+zplug "plugins/vi-mode", from:oh-my-zsh
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions', defer:2
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+
+if ! zplug check; then
+  zplug install
+fi
+
+zplug load
+
+# zsh-autosuggestions 自动补全快捷键修改
+bindkey ',' autosuggest-accept
 
 # User configuration
 
@@ -138,56 +257,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# zplug configruation
-if [[ ! -d "${ZPLUG_HOME}" ]]; then
-  if [[ ! -d ~/.zplug ]]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
-    # If we can't get zplug, it'll be a very sobering shell experience. To at
-    # least complete the sourcing of this file, we'll define an always-false
-    # returning zplug function.
-    if [[ $? != 0 ]]; then
-      function zplug() {
-        return 1
-      }
-    fi
-  fi
-  export ZPLUG_HOME=~/.zplug
-fi
-if [[ -d "${ZPLUG_HOME}" ]]; then
-  source "${ZPLUG_HOME}/init.zsh"
-fi
 
-zplug 'plugins/git', from:oh-my-zsh, if:'which git'
-zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme
-zplug "plugins/vi-mode", from:oh-my-zsh
-zplug 'zsh-users/zsh-autosuggestions'
-zplug 'zsh-users/zsh-completions', defer:2
-zplug 'zsh-users/zsh-history-substring-search'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-
-if ! zplug check; then
-  zplug install
-fi
-
-zplug load
-
-# zsh-autosuggestions 自动补全快捷键修改
-bindkey ',' autosuggest-accept
-
-
+#-------------------aliases-------------------
 if [ -f ~/.aliases ]; then
-        . ~/.aliases
+	. ~/.aliases
 fi
-
-
-plugins=(virtualenv)
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
-
-# 使用git安装的
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
