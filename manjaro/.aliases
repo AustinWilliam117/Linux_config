@@ -20,8 +20,10 @@ alias python='python3'
 
 alias hexog='hexo g'
 alias hexod='hexo d'
-
+alias hexos='hexo s'
 
 alias nv='nvim'
 
+alias proxy='proxychains'
 
+alias mysql='mysql -u root -p'

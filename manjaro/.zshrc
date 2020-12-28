@@ -263,5 +263,11 @@ if [ -f ~/.aliases ]; then
 	. ~/.aliases
 fi
 
+#autojump
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+
+#bash-insulter
+if [ -f /etc/bash.command-not-found ]; then
+    . /etc/bash.command-not-found
+fi
 
