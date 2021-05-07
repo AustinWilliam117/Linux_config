@@ -1,5 +1,11 @@
+"设置颜色
+set bg=dark
+colorscheme gruvbox
+
+"显示行号
 set number
 
+"编码格式
 set encoding=utf-8
 
 "语法高亮
@@ -35,6 +41,27 @@ inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
 
+"vim禁用上下左右和Esc
+inoremap <Up> <Nop>
+nnoremap <Up> <Nop>
+
+inoremap <Down> <Nop>
+nnoremap <Down> <Nop>
+
+inoremap <Left> <Nop>
+nnoremap <Left> <Nop>
+
+inoremap <Rigth> <Nop>
+nnoremap <Right> <Nop>
+
+inoremap <Esc> <Nop>
+
+"H和L替换^和$
+nnoremap H ^
+nnoremap L $
+
+"原有H被替换，使用,w代替
+nnoremap ,h H
 
 "pecify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -67,6 +94,13 @@ Plug 'Raimondi/delimitMate'
 "代码格式化
 Plug 'sbdchd/neoformat'
 
+"主题
+"Plug 'morhetz/gruvbox'
+
+"VIM-Markdown
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
+
 " Ininialize plugin system
 call plug#end()
 
@@ -81,4 +115,3 @@ let NERDTreeIgnore=[
     \ '\.pyc$', '\.hg$', '\.swp$', '\.git$', '\.svn$', '\.stversions$', '\.ropeproject$',
     \ '\.pyo$', '\DS_Store$', '\.sass-cache$', '__pycache__$', '\.egg-info$', 
     \ ]
-

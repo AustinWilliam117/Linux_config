@@ -1,6 +1,6 @@
  
 alias d='cd /home/william/DYJ'
-alias s='screenfetch'
+alias n='neofetch | lolcat'
 alias his='history'
 alias q='exit'
 alias quit='exit'
@@ -19,7 +19,7 @@ alias py='python3'
 alias python='python3'
 
 alias hexog='hexo g'
-alias hexod='hexo d'
+alias hexod='hexo deploy'
 alias hexos='hexo s'
 
 alias nv='nvim'
