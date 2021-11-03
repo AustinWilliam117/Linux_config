@@ -1,0 +1,77 @@
+{
+    "editor.fontSize": 18,
+    "editor.fontFamily": "'Hack Nerd Font','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "debug.console.fontSize": 16,
+    "markdown.preview.fontSize": 16,
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "files.autoSave": "afterDelay",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Gruvbox Material Dark",
+    "editor.codeActionsOnSave": null,
+
+    // 默认状态下setting.json文件内容End
+
+    // 关于vim的配置文件
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Up"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Down"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Left"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Right"]
+        },
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+        "before": ["Nop"],
+        "after": ["Up"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Down"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Left"]
+        },
+        {
+        "before": ["Nop"],
+        "after": ["Right"]
+        },
+        {
+        "before": ["H"],
+        "after": ["^"]
+        },
+        {
+        "before": ["L"],
+        "after": ["$"]
+        },
+
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "workbench.colorTheme": "Gruvbox Dark (Medium)",
+    "editor.fontFamily": "'Hack Nerd Font',Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": null
+
+}
