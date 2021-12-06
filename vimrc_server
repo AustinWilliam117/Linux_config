@@ -1,0 +1,12 @@
+"显示行号
+set number
+
+"使用jj进入normal模式
+inoremap jj <Esc>`^
+ 
+"H和L替换^和$
+nnoremap H ^
+nnoremap L $
+
+"原有H被替换，使用,w代替
+nnoremap ,h H
