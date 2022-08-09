@@ -1,0 +1,27 @@
+alias d='cd /Users/william/DYJ'
+alias n='neofetch | lolcat'
+alias his='history'
+alias q='exit'
+alias quit='exit'
+alias lsn='ls | nl'
+
+alias loc='open http://127.0.0.1'
+
+alias gdc='git diff --cached'
+alias gdm='git diff master'a
+alias gs='git status -s'
+alias gmg='git commit -m'
+
+alias py='python3'
+alias python='python3'
+alias pip='pip3'
+
+alias hexog='hexo g'
+alias hexod='hexo deploy'
+alias hexos='hexo s'
+
+alias nv='nvim'
+
+alias proxy='proxychains4'
+
+alias mysql='/usr/local/mysql/bin/mysql'
